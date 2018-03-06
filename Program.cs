@@ -15,7 +15,7 @@ namespace Vending_Machine
         }
         public static void Main()
         {
-            decimal currency = 0m;
+            decimal currency = 0m, returnedcurrency=0m, change=0m;
             string type;
 
             List<Products> product = new List<Products>
@@ -34,21 +34,34 @@ namespace Vending_Machine
 
             Console.WriteLine("\nPlease enter the type of snack you want: ");
             type = Console.ReadLine();
-            Console.WriteLine("\nEnter the amount of money entered: ");
+            Console.WriteLine("\nEnter the amount of money paid: ");
             currency = decimal.Parse(Console.ReadLine());
 
-            Console.WriteLine(type + " {0:C2}", currency); //Checking the correct assignment.
+            //Console.WriteLine(type + " {0:C2}", currency); //Checking the correct assignment.
 
-            Vending(currency, type);
+            returnedcurrency = ProductCatelog(type);
+            Console.WriteLine(returnedcurrency);
+
+            change=Vending(currency, returnedcurrency);
 
             Console.ReadLine();//Stopping the Console Window
         }
-        public static void Vending(decimal currency, string type)
+        public static decimal Vending(decimal currency, decimal snackprice)
         {
             decimal dollar = 1m, quarter = .25m, dime = .10m, nickel = .05m;
 
-        }
 
+        }
+        public static decimal ProductCatelog(string type)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (StringComparison.OrdinalIgnoreCase(type, List<i>))
+                {
+                    return Products.Price.GetType;
+                };
+            }
+        }
 
     }
 }
