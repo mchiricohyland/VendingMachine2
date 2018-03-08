@@ -58,10 +58,10 @@ namespace Vending_Machine
             }
             Console.WriteLine("Total is {0:C2}", total);
 
-            try
+            while (change <= 0)
             {
                 Console.WriteLine("\nHow many Dollars are you entering? ");
-                currency = decimal.Parse(Console.ReadLine());
+                currency += decimal.Parse(Console.ReadLine());
                 Console.WriteLine("\nHow many Quarters are you entering? ");
                 currency += (decimal.Parse(Console.ReadLine()) * 0.25m);
                 Console.WriteLine("\nHow many Dimes are you entering? ");
@@ -69,10 +69,19 @@ namespace Vending_Machine
                 Console.WriteLine("\nHow many Nickels are you entering? ");
                 currency += (decimal.Parse(Console.ReadLine()) * 0.05m);
                 change = Vending(currency, total);
-                Console.WriteLine("\nYour change is {0:C2}", change);
+                if (change >= 0)
+                {
+                    Console.WriteLine("\nYour change is {0:C2}", change);
+                    Console.WriteLine("\nThank you! Have a great day!");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nYou still owe {0:C2}", currency);
+                    Console.WriteLine("\nPlease enter more money.");
+                    continue;
+                }
             }
-
-
             Console.ReadLine();//Stopping the Console Window from closing.
         }
         public static void VendingMachine()
