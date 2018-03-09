@@ -32,10 +32,38 @@ namespace Vending_Machine
         }
         public static void Main()
         {
-            decimal currency = 0m, change = 0m, total = 0m;
-            string type = "0";
+            decimal currency = 0m, change = 0m, total = 0m, toSpend = 0m;
+            string type = "0", answer;
             Console.WriteLine("***Vending Machine***\n");
-            VendingMachine();//Show All Products
+
+
+            Console.WriteLine("Would you like to enter an amount of money to spend or see all items? \nEnter \"Yes\" to enter money or \"See All\" to view all items.");
+            answer = Console.ReadLine();
+            answer.ToLower();
+
+            while (answer != "cancel")
+            {
+                if (answer == "yes")
+                {
+                    Console.WriteLine("\nEnter how much money you want to spend.");
+                    toSpend = decimal.Parse(Console.ReadLine());
+                    VendingMachineUnder(toSpend);
+                    break;
+                }
+                if (answer == "see all")
+                {
+                    VendingMachine();//Show All Products
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("\nI didn't catch that, please try again.\n");
+                    Console.WriteLine("Would you like to enter an amount of money to spend or see all items? \nEnter \"Yes\" to enter money or \"See All\" to view all items.");
+                    answer = Console.ReadLine();
+                    answer.ToLower();
+                }
+            }
+
 
             Console.WriteLine("\nPlease enter the type of snack you want: (Enter 99 to indicate end of order)");
             type = Console.ReadLine();
@@ -95,6 +123,23 @@ namespace Vending_Machine
 
             foreach (Products p in array2)
                 Console.WriteLine(p.Type + " {0:C2}", p.Price);
+        }
+        public static void VendingMachineUnder(decimal toSpend)
+        {
+            Products[] array2 = new Products[6];
+
+            for (int i = 0; i < 6; i++)
+            {
+                array2[i] = Catalog(i);
+
+            }
+            foreach (Products p in array2)
+            {
+                if (toSpend >= p.Price)
+                {
+                    Console.WriteLine(p.Type + " {0:C2}", p.Price);
+                }
+            }
         }
         public static decimal Vending(decimal entry, decimal snackprice)
         {
